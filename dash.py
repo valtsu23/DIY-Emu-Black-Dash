@@ -3,7 +3,7 @@ import time
 import struct
 
 # PC test mode
-TEST_MODE = True
+TEST_MODE = False
 
 # Screen size
 size = width, height = (800, 480)
@@ -18,7 +18,7 @@ if TEST_MODE is False:
     from rpi_hardware_pwm import HardwarePWM
     screen = pygame.display.set_mode(size, pygame.FULLSCREEN)
     pygame.mouse.set_visible(False)
-    PATH = "/home/valtteri/EMUB/"
+    PATH = "/home/your_user_name/Dash/"
     # Can bus
     os.system('')
     os.system('ifconfig can0 up')
@@ -29,7 +29,7 @@ if TEST_MODE is False:
     backlight.start(70)
 else:
     screen = pygame.display.set_mode(size)
-    PATH = "P:/Raspberry_pi/EMU_display_mcp/"
+    PATH = "P:/Dash/"
 
 # Read needed files
 units_memory = open(PATH + "units_memory.txt", "r")
