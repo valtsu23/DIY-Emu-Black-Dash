@@ -30,8 +30,8 @@ def action(rpm, STEP, END, br):
     # If shift light step is exceeded
     elif shift_changed != shift:
         # LED steps control
-        print("Shift:", shift)
-        print("Shift_changed:", shift_changed)
+        # print("Shift:", shift)
+        # print("Shift_changed:", shift_changed)
         if shift <= 3:
             pixels[0] = (0, br, 0)
             pixels[7] = (0, br, 0)
