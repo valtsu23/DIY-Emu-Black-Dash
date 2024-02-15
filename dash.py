@@ -261,10 +261,15 @@ NO_CAN_BUS_R = font_20.render("No Can Bus communication", True, WHITE, BLACK)
 # RPM bar numbers
 rpm_list = [font_60.render(str(x), True, WHITE) for x in range(1, 10)]
 
-HIGH_BEAM_BLUE = pygame.image.load(PATH + "High_beam_blue.png")
-HIGH_BEAM_BLACK = pygame.image.load(PATH + "High_beam_black.png")
-FUEL_PUMP_YELLOW = pygame.image.load(PATH + "Fuel_pump_yellow.png")
-FUEL_PUMP_BLACK = pygame.image.load(PATH + "Fuel_pump_black.png")
+image0 = pygame.image.load(PATH + "High_beam_blue.png")
+image1 = pygame.image.load(PATH + "High_beam_black.png")
+image2 = pygame.image.load(PATH + "Fuel_pump_yellow.png")
+image3 = pygame.image.load(PATH + "Fuel_pump_black.png")
+
+HIGH_BEAM_BLUE = pygame.Surface.convert(image0)
+HIGH_BEAM_BLACK = pygame.Surface.convert(image1)
+FUEL_PUMP_YELLOW = pygame.Surface.convert(image2)
+FUEL_PUMP_BLACK = pygame.Surface.convert(image3)
 
 unit_buttons = [pygame.Rect(0, 95, 180, 100), pygame.Rect(0, 210, 180, 100),
                 pygame.Rect(0, 325, 180, 100), pygame.Rect(RIGHT_SIDE, 95, 180, 100),
