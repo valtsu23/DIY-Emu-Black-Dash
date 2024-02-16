@@ -2,7 +2,7 @@ import board
 import neopixel
 import time
 
-# Neopixel setup (pin 4, number of leds)
+# Neopixel setup (pin, number of leds)
 pixels = neopixel.NeoPixel(board.D21, 8)
 
 # Turn off all the leds
