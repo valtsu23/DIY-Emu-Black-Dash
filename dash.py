@@ -3,7 +3,7 @@ import time
 import struct
 
 # PC test mode
-TEST_MODE = True
+TEST_MODE = False
 
 # Screen size
 size = width, height = (800, 480)
