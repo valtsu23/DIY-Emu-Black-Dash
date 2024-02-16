@@ -204,7 +204,9 @@ if TEST_MODE is False:
 # Return CPU temperature and CPU clock as a character string
 def getCPUtemperature():
     temp = os.popen('vcgencmd measure_temp').readline()
-    return (temp.replace("temp=", ""))
+    temp = temp.replace("temp=", "")
+    return temp.replace("'C\n", "°C")
+    
 def getCPUclock():
     clock = os.popen('vcgencmd measure_clock arm').readline()
     clock = clock.replace("frequency(48)=", "")
@@ -633,7 +635,7 @@ while loop:
             pygame.draw.rect(screen, LIGHT_BLUE, (0, 440, 800, 40))
             cpu_temp = getCPUtemperature()
             cpu_clock = getCPUclock()
-            cpu_stats_text = font_30.render("Cpu: " + cpu_temp + ", " + cpuclock + "MHz ",
+            cpu_stats_text = font_30.render("Cpu: " + cpu_temp + ", " + cpu_clock + " MHz",
                                             True, WHITE, LIGHT_BLUE)
             screen.blit(cpu_stats_text, (0, 443))
         else:
