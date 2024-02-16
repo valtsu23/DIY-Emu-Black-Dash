@@ -18,9 +18,9 @@ if TEST_MODE is False:
     from rpi_hardware_pwm import HardwarePWM
     screen = pygame.display.set_mode(size, pygame.FULLSCREEN)
     pygame.mouse.set_visible(False)
-    PATH = "/home/your_user_name/EMUB/"
+    PATH = "/home/your_user_name/Dash/"
     # Can bus
-    os.system('')
+    os.system('ip link set can0 type can bitrate 500000')
     os.system('ifconfig can0 up')
     can_bus_filter = [{"can_id": 0x607, "can_mask": 0x5F8 , "extended": False}]
     can_bus = can.Bus(channel="can0", interface="socketcan", can_filters=can_bus_filter)
