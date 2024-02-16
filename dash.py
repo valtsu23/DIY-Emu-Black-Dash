@@ -18,9 +18,9 @@ if TEST_MODE is False:
     from rpi_hardware_pwm import HardwarePWM
     screen = pygame.display.set_mode(size, pygame.FULLSCREEN)
     pygame.mouse.set_visible(False)
-    PATH = "/home/your_user_name/Dash/"
+    PATH = "/home/your_user_name/EMUB/"
     # Can bus
-    os.system('ip link set can0 type can bitrate 500000')
+    os.system('')
     os.system('ifconfig can0 up')
     can_bus_filter = [{"can_id": 0x607, "can_mask": 0x5F8 , "extended": False}]
     can_bus = can.Bus(channel="can0", interface="socketcan", can_filters=can_bus_filter)
@@ -29,7 +29,7 @@ if TEST_MODE is False:
     backlight.start(70)
 else:
     screen = pygame.display.set_mode(size)
-    PATH = "P:/Dash/"
+    PATH = "P:/Raspberry_pi/EMU_display_mcp/"
 
 # Read needed files
 units_memory = open(PATH + "units_memory.txt", "r")
@@ -201,10 +201,15 @@ if TEST_MODE is False:
     old_dark = is_dark()
     dimmer(old_dark)
 
-# Return CPU temperature as a character string
+# Return CPU temperature and CPU clock as a character string
 def getCPUtemperature():
-    res = os.popen('vcgencmd measure_temp').readline()
-    return (res.replace("'C\n", ""))
+    temp = os.popen('vcgencmd measure_temp').readline()
+    return (temp.replace("'C\n", ""))
+def getCPUclock():
+    clock = os.popen('vcgencmd measure_clock arm').readline()
+    clock = clock.replace("frequency(45)=", "")
+    clock = int(clock)/1000000
+    return str(clock)
 
 def error_flags(number):
     # Convert to bit list
@@ -627,8 +632,9 @@ while loop:
         if len(error_list) == 0:
             pygame.draw.rect(screen, LIGHT_BLUE, (0, 440, 800, 40))
             cpu_temp = getCPUtemperature()
-            cpu_temp_text = font_30.render("Cpu " + cpu_temp, True, WHITE, LIGHT_BLUE)
-            screen.blit(cpu_temp_text, (0, 443))
+            cpu_clock = getCPUclock()
+            cpu_stats_text = font_30.render("Cpu " + cpu_temp + ", " + cpuclock + "MHz", True, WHITE, LIGHT_BLUE)
+            screen.blit(cpu_stats_text, (0, 443))
         else:
             errors_text = font_30.render("Errors " + str(len(error_list)) + ": ", True, WHITE, RED)
             errors_r = font_30.render(", ".join(error_list), True, WHITE, RED)
