@@ -47,6 +47,7 @@ speed = 0
 gear = 0
 out_temp = 0
 fuel_level = None
+fuel_used = None
 raw_fuel_level = 0
 refuel = False
 batt_v = 0
@@ -60,7 +61,7 @@ old_rpm = None
 old_gear = None
 old_speed = None
 old_out_temp = None
-old_odometer = None
+old_odometer = odometer
 old_clock = None
 old_error_list = None
 old_refuel = None
@@ -175,6 +176,8 @@ def menu(pos):
         return "fuel_used"
     elif pygame.Rect.collidepoint(fuel_level_button, pos):
         return "fuel_level"
+    elif pygame.Rect.collidepoint(fuel_consumption_button, pos):
+        return "fuel_consum"
 
 # Read light sensor value
 def is_dark():
@@ -206,7 +209,7 @@ def getCPUtemperature():
     temp = os.popen('vcgencmd measure_temp').readline()
     temp = temp.replace("temp=", "")
     return temp.replace("'C\n", "°C")
-    
+
 def getCPUclock():
     clock = os.popen('vcgencmd measure_clock arm').readline()
     clock = clock.replace("frequency(48)=", "")
@@ -244,7 +247,7 @@ title_text_units = {"rpm": "RPM", "tps": "TPS                 %",
                     "ethanol_cont": "Ethanol           %", "dbw_pos": "Dbw position  %",
                     "boost_t": "Boost target  kPa", "dsg_mode": "DSG mode",
                     "lambda_t": "Lambda target", "fuel_used": "Fuel used         L",
-                    "fuel_level": "Fuel level        %"}
+                    "fuel_level": "Fuel level        %", "fuel_consum": "Fuel c.  L/100km"}
 
 dsg_mode_return = {0: "0", 2: "P", 3: "R", 4: "N", 5: "D", 6: "S", 7: "M", 15: "Fault"}
 
@@ -396,7 +399,7 @@ while loop:
         # Odometer
         speed_sum += speed
         speed_sum_counter += 1
-        if speed_sum_counter >= 1000:
+        if speed_sum_counter >= 100:
             # Calculating travelled distance and save it
             odometer = odometer_save(speed_sum, speed_sum_counter, distance_timer, odometer, PATH)
             distance_timer = time.monotonic()
@@ -450,8 +453,13 @@ while loop:
             values[units.index("dsg_mode")] = dsg_mode_return[message[2]]
         if "lambda_t" in units:
             values[units.index("lambda_t")] = round(message[3] * 0.01, 2)
+        fuel_used = message[5] * 0.01
         if "fuel_used" in units:
-            values[units.index("fuel_used")] = round(message[5] * 0.01, 1)
+            values[units.index("fuel_used")] = round(fuel_used, 1)
+    if int(odometer) != int(old_odometer) and fuel_used is not None:
+        fuel_consum = round(fuel_used / ((odometer - old_odometer) / 100), 1)
+        if "fuel_consum" in units:
+            values[units.index("fuel_consum")] = fuel_consum
 
     # Shift light
     if TEST_MODE is False:
@@ -546,7 +554,7 @@ while loop:
         display_update.append((CENTER_X - 110, 180, 220, 150))
 
     clock = time.strftime("%H:%M")
-    if clock != old_clock or out_temp != old_out_temp or odometer != old_odometer or clear is True:
+    if clock != old_clock or out_temp != old_out_temp or int(odometer) != int(old_odometer) or clear is True:
         pygame.draw.rect(screen, BLACK, [CENTER_X - 110, 340, 220, 80], border_radius=10)
         screen.blit(CELSIUS_20, (CENTER_X + 75, 350))
         # Clock update
@@ -714,7 +722,7 @@ while loop:
         lambda_t_button = create_rect(coordinates_x[0], coordinates_y[5], "Lambda target")
         fuel_used_button = create_rect(coordinates_x[1], coordinates_y[5], "Fuel used")
         fuel_level_button = create_rect(coordinates_x[2], coordinates_y[5], "Fuel level")
-        empty_button = create_rect(coordinates_x[3], coordinates_y[5], "")
+        fuel_consumption_button = create_rect(coordinates_x[3], coordinates_y[5], "Fuel consum.")
 
         pygame.display.flip()
         draw_menu = False
