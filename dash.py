@@ -454,7 +454,7 @@ while loop:
         if "dsg_mode" in units:
             values["dsg_mode"] = dsg_mode_return[message[2]]
         if "lambda_t" in units:
-            values"lambda_t"] = round(message[3] * 0.01, 2)
+            values["lambda_t"] = round(message[3] * 0.01, 2)
         fuel_used = message[5] * 0.01
         if "fuel_used" in units:
             values["fuel_used"] = round(fuel_used, 1)
