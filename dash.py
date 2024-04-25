@@ -68,8 +68,8 @@ old_refuel = None
 old_right_blinker = None
 old_left_blinker = None
 old_high_beam = None
-old_values = [None, None, None, None, None, None]
-values = [0, 0, 0, 0, 0, 0]
+values = {x : 0 for x in units}
+old_values = {x : None for x in units}
 clear = True
 loop = True
 touch = False
@@ -78,6 +78,7 @@ filter_counter = 0
 filter_sum = 0
 countdown = 10
 unit_change = None
+units_ok = True
 draw_menu = False
 old_cpu_temp = None
 shift_changed = 10
@@ -335,7 +336,8 @@ while loop:
     # Clearing screen
     if clear:
         screen.fill((60, 60, 60))
-        values = [0, 0, 0, 0, 0, 0]
+        values = {x : 0 for x in units}
+        old_values = {x : None for x in units}
         pygame.display.flip()
 
     if message_id == 0x400:
@@ -376,7 +378,7 @@ while loop:
             old_fuel_level = fuel_level
             start_up = False
         if "fuel_level" in units:
-            values[units.index("fuel_level")] = fuel_level
+            values["fuel_level"] = fuel_level
 
     if message_id == ECU_CAN_ID:
         # Unpack message
@@ -483,55 +485,56 @@ while loop:
             dimmer(dark)
             old_dark = dark
 
-    # Update values, when needed
-    # Top left value update
-    if values[0] != old_values[0] or clear is True:
-        old_values[0] = values[0]
-        pygame.draw.rect(screen, BLACK, [0, 95, 180, 100], border_radius=10)
-        value_0_r = font_60.render(str(values[0]), True, WHITE, BLACK)
-        screen.blit(value_0_r, (10, 125))
-        screen.blit(units_r[0], (10, 100))
-        display_update.append((0, 95, 180, 100))
-    # Center left value update
-    if values[1] != old_values[1] or clear is True:
-        old_values[1] = values[1]
-        pygame.draw.rect(screen, BLACK, [0, 210, 180, 100], border_radius=10)
-        value_1_r = font_60.render(str(values[1]), True, WHITE, BLACK)
-        screen.blit(value_1_r, (10, 240))
-        screen.blit(units_r[1], (10, 215))
-        display_update.append((0, 210, 180, 100))
-    # Bottom left value update
-    if values[2] != old_values[2] or clear is True:
-        old_values[2] = values[2]
-        pygame.draw.rect(screen, BLACK, [0, 325, 180, 100], border_radius=10)
-        value_2_r = font_60.render(str(values[2]), True, WHITE, BLACK)
-        screen.blit(value_2_r, (10, 355))
-        screen.blit(units_r[2], (10, 330))
-        display_update.append((0, 325, 180, 100))
-    # Top right value update
-    if values[3] != old_values[3] or clear is True:
-        old_values[3] = values[3]
-        pygame.draw.rect(screen, BLACK, [RIGHT_SIDE, 95, 180, 100], border_radius=10)
-        value_3_r = font_60.render(str(values[3]), True, WHITE, BLACK)
-        screen.blit(value_3_r, (RIGHT_SIDE + 10, 125))
-        screen.blit(units_r[3], (RIGHT_SIDE + 10, 100))
-        display_update.append((RIGHT_SIDE, 95, 180, 100))
-    # Center right value update
-    if values[4] != old_values[4] or clear is True:
-        old_values[4] = values[4]
-        pygame.draw.rect(screen, BLACK, [RIGHT_SIDE, 210, 180, 100], border_radius=10)
-        value_4_r = font_60.render(str(values[4]), True, WHITE, BLACK)
-        screen.blit(value_4_r, (RIGHT_SIDE + 10, 240))
-        screen.blit(units_r[4], (RIGHT_SIDE + 10, 215))
-        display_update.append((RIGHT_SIDE, 210, 180, 100))
-    # Bottom right value update
-    if values[5] != old_values[5] or clear is True:
-        old_values[5] = values[5]
-        pygame.draw.rect(screen, BLACK, [RIGHT_SIDE, 325, 180, 100], border_radius=10)
-        value_5_r = font_60.render(str(values[5]), True, WHITE, BLACK)
-        screen.blit(value_5_r, (RIGHT_SIDE + 10, 355))
-        screen.blit(units_r[5], (RIGHT_SIDE + 10, 330))
-        display_update.append((RIGHT_SIDE, 325, 180, 100))
+    # To make sure a unit button is pressed in menu
+    if units_ok is True:
+        # Update values, when needed
+        # Top left value update
+        if values[units[0]] != old_values[units[0]] or clear is True:
+            pygame.draw.rect(screen, BLACK, [0, 95, 180, 100], border_radius=10)
+            value_0_r = font_60.render(str(values[units[0]]), True, WHITE, BLACK)
+            screen.blit(value_0_r, (10, 125))
+            screen.blit(units_r[0], (10, 100))
+            display_update.append((0, 95, 180, 100))
+        # Center left value update
+        if values[units[1]] != old_values[units[1]] or clear is True:
+            pygame.draw.rect(screen, BLACK, [0, 210, 180, 100], border_radius=10)
+            value_1_r = font_60.render(str(values[units[1]]), True, WHITE, BLACK)
+            screen.blit(value_1_r, (10, 240))
+            screen.blit(units_r[1], (10, 215))
+            display_update.append((0, 210, 180, 100))
+        # Bottom left value update
+        if values[units[2]] != old_values[units[2]] or clear is True:
+            pygame.draw.rect(screen, BLACK, [0, 325, 180, 100], border_radius=10)
+            value_2_r = font_60.render(str(values[units[2]]), True, WHITE, BLACK)
+            screen.blit(value_2_r, (10, 355))
+            screen.blit(units_r[2], (10, 330))
+            display_update.append((0, 325, 180, 100))
+        # Top right value update
+        if values[units[3]] != old_values[units[3]] or clear is True:
+            pygame.draw.rect(screen, BLACK, [RIGHT_SIDE, 95, 180, 100], border_radius=10)
+            value_3_r = font_60.render(str(values[units[3]]), True, WHITE, BLACK)
+            screen.blit(value_3_r, (RIGHT_SIDE + 10, 125))
+            screen.blit(units_r[3], (RIGHT_SIDE + 10, 100))
+            display_update.append((RIGHT_SIDE, 95, 180, 100))
+        # Center right value update
+        if values[units[4]] != old_values[units[4]] or clear is True:
+            pygame.draw.rect(screen, BLACK, [RIGHT_SIDE, 210, 180, 100], border_radius=10)
+            value_4_r = font_60.render(str(values[units[4]]), True, WHITE, BLACK)
+            screen.blit(value_4_r, (RIGHT_SIDE + 10, 240))
+            screen.blit(units_r[4], (RIGHT_SIDE + 10, 215))
+            display_update.append((RIGHT_SIDE, 210, 180, 100))
+        # Bottom right value update
+        if values[units[5]] != old_values[units[5]] or clear is True:
+            pygame.draw.rect(screen, BLACK, [RIGHT_SIDE, 325, 180, 100], border_radius=10)
+            value_5_r = font_60.render(str(values[units[5]]), True, WHITE, BLACK)
+            screen.blit(value_5_r, (RIGHT_SIDE + 10, 355))
+            screen.blit(units_r[5], (RIGHT_SIDE + 10, 330))
+            display_update.append((RIGHT_SIDE, 325, 180, 100))
+        # Save old values
+        for x in range(6):
+            if values[units[x]] != old_values[units[x]] or clear is True:
+                old_values[units[x]] = values[units[x]]
+
     # Gear update
     if gear != old_gear or clear is True:
         pygame.draw.rect(screen, BLACK, [CENTER_X - 40, 90, 80, 80], border_radius=10)
@@ -657,6 +660,7 @@ while loop:
         display_update.append((0, 440, 800, 40))
 
     if touch:
+        # Pick a new unit from menu
         for x in range(6):
             if unit_change == x:
                 units[x] = menu(pos)
@@ -664,6 +668,10 @@ while loop:
                     units_r[x] = font_20.render(title_text_units[units[x]], True, WHITE, BLACK)
                     unit_change = None
                     clear = True
+                    units_ok = True
+                else:
+                    units_ok = False
+        # Enable menu draw
         for x in range(6):
             if clear is False and pygame.Rect.collidepoint(unit_buttons[x], pos):
                 draw_menu = True
