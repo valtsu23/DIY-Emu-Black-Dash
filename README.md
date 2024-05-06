@@ -1,3 +1,3 @@
 # DIY-Emu-Black-Dash
-Raspberry pi based digital dash working with Ecumaster Emu Black
+Raspberry pi based digital dash working with Ecumaster Emu Black. 
 More info coming
