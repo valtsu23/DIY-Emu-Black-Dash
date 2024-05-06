@@ -3,7 +3,7 @@ import time
 import struct
 
 # PC test mode
-TEST_MODE = True
+TEST_MODE = False
 
 # Screen size
 size = width, height = (800, 480)
@@ -326,7 +326,6 @@ while loop:
     if TEST_MODE is True or message is None:
         data = None
         message_id = None
-
     # Reset countdown
     countdown = 10
 
@@ -384,15 +383,15 @@ while loop:
         message = struct.unpack("<HBbHH", data)
         rpm = message[0]
         if "rpm" in units:
-            values[units.index("rpm")] = rpm
+            values["rpm"] = rpm
         if "tps" in units:
-            values[units.index("tps")] = int(message[1] * 0.5)
+            values["tps"] = int(message[1] * 0.5)
         if "iat" in units:
-            values[units.index("iat")] = message[2]
+            values["iat"] = message[2]
         if "map" in units:
-            values[units.index("map")] = message[3]
+            values["map"] = message[3]
         if "inj_pw" in units:
-            values[units.index("inj_pw")] = round(message[4] * 0.016129, 1)
+            values["inj_pw"] = round(message[4] * 0.016129, 1)
 
     elif message_id == ECU_CAN_ID + 2:
         message = struct.unpack("<HBBBBh", data)
@@ -407,60 +406,60 @@ while loop:
             speed_sum = 0
             speed_sum_counter = 0
         if "oil_t" in units:
-            values[units.index("oil_t")] = message[2]
+            values["oil_t"] = message[2]
         if "oil_p" in units:
-            values[units.index("oil_p")] = round(message[3] * 0.0625, 1)
+            values["oil_p"] = round(message[3] * 0.0625, 1)
         if "fuel_p" in units:
-            values[units.index("fuel_p")] = round(message[4] * 0.0625, 1)
+            values["fuel_p"] = round(message[4] * 0.0625, 1)
         if "clt_t" in units:
-            values[units.index("clt_t")] = message[5]
+            values["clt_t"] = message[5]
 
     elif message_id == ECU_CAN_ID + 3:
         message = struct.unpack("<bBBBHH", data)
         if "ign_ang" in units:
-            values[units.index("ign_ang")] = message[0] * 0.5
+            values["ign_ang"] = message[0] * 0.5
         if "dwell" in units:
-            values[units.index("dwell")] = round(message[1] * 0.05, 1)
+            values["dwell"] = round(message[1] * 0.05, 1)
         if "lambda" in units:
-            values[units.index("lambda")] = round(message[2] * 0.0078125, 2)
+            values["lambda"] = round(message[2] * 0.0078125, 2)
         if "lambda_corr" in units:
-            values[units.index("lambda_corr")] = int(message[3] * 0.5)
+            values["lambda_corr"] = int(message[3] * 0.5)
         if "egt_1" in units:
-            values[units.index("egt_1")] = message[4]
+            values["egt_1"] = message[4]
         if "egt_2" in units:
-            values[units.index("egt_2")] = message[5]
+            values["egt_2"] = message[5]
 
     elif message_id == ECU_CAN_ID + 4:
         message = struct.unpack("<BbHHBB", data)
         gear = message[0]
         batt_v = round(message[2] * 0.027, 1)
         if "batt_v" in units:
-            values[units.index("batt_v")] = batt_v
+            values["batt_v"] = batt_v
         # Error flags
         errors = message[3]
         if "ethanol_cont" in units:
-            values[units.index("ethanol_cont")] = message[5]
+            values["ethanol_cont"] = message[5]
 
     elif message_id == ECU_CAN_ID + 5:
         message = struct.unpack("<BBhHBB", data)
         if "dbw_pos" in units:
-            values[units.index("dbw_pos")] = int(message[0] * 0.5)
+            values["dbw_pos"] = int(message[0] * 0.5)
 
     elif message_id == ECU_CAN_ID + 7:
         message = struct.unpack("<HBBBBH", data)
         if "boost_t" in units:
-            values[units.index("boost_t")] = message[0]
+            values["boost_t"] = message[0]
         if "dsg_mode" in units:
-            values[units.index("dsg_mode")] = dsg_mode_return[message[2]]
+            values["dsg_mode"] = dsg_mode_return[message[2]]
         if "lambda_t" in units:
-            values[units.index("lambda_t")] = round(message[3] * 0.01, 2)
+            values["lambda_t"] = round(message[3] * 0.01, 2)
         fuel_used = message[5] * 0.01
         if "fuel_used" in units:
-            values[units.index("fuel_used")] = round(fuel_used, 1)
+            values["fuel_used"] = round(fuel_used, 1)
     if int(odometer) != int(old_odometer) and fuel_used is not None:
         fuel_consum = round(fuel_used / ((odometer - old_odometer) / 100), 1)
         if "fuel_consum" in units:
-            values[units.index("fuel_consum")] = fuel_consum
+            values["fuel_consum"] = fuel_consum
 
     # Shift light
     if TEST_MODE is False:
