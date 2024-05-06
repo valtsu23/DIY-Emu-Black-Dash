@@ -326,9 +326,6 @@ while loop:
     if TEST_MODE or message is None:
         data = None
         message_id = None
-        rpm += 1
-        if "rpm" in units:
-            values["rpm"] = rpm
     # Reset countdown
     countdown = 10
 
