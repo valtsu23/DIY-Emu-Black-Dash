@@ -194,7 +194,7 @@ def is_dark():
 def dimmer(value):
     global led_br
     # Dark
-    if value is True:
+    if value:
         backlight.change_duty_cycle(70)
         led_br = 10
     # Bright
@@ -224,7 +224,7 @@ def error_flags(number):
     # Get the errors that are on
     errors_on = []
     for x in range(len(bit_list)):
-        if bit_list[x] is True:
+        if bit_list[x]:
             errors_on.append(ERRORFLAGS[x])
     return errors_on
 
@@ -318,12 +318,12 @@ while loop:
             if countdown == 0:
                 power_off = True
                 break
-            if loop is True:
+            if loop:
                 continue
         else:
             data = message.data
             message_id = message.arbitration_id
-    if TEST_MODE is True or message is None:
+    if TEST_MODE or message is None:
         data = None
         message_id = None
     # Reset countdown
@@ -362,9 +362,9 @@ while loop:
             filter_counter = 0
             filter_ready = True
         # Scaling and reading stabilation
-        if filter_ready is True or start_up is True:
+        if filter_ready or start_up:
             # If filtering not ready
-            if start_up is True:
+            if start_up:
                 fuel_level = raw_fuel_level
             fuel_level = int((fuel_level - FUEL_MIN) / FUEL_DIVIDER - 100)
             if fuel_level != 0:
@@ -484,45 +484,45 @@ while loop:
             old_dark = dark
 
     # To make sure a unit button is pressed in menu
-    if units_ok is True:
+    if units_ok:
         # Update values, when needed
         # Top left value update
-        if values[units[0]] != old_values[units[0]] or clear is True:
+        if values[units[0]] != old_values[units[0]] or clear:
             pygame.draw.rect(screen, BLACK, [0, 95, 180, 100], border_radius=10)
             value_0_r = font_60.render(str(values[units[0]]), True, WHITE, BLACK)
             screen.blit(value_0_r, (10, 125))
             screen.blit(units_r[0], (10, 100))
             display_update.append((0, 95, 180, 100))
         # Center left value update
-        if values[units[1]] != old_values[units[1]] or clear is True:
+        if values[units[1]] != old_values[units[1]] or clear:
             pygame.draw.rect(screen, BLACK, [0, 210, 180, 100], border_radius=10)
             value_1_r = font_60.render(str(values[units[1]]), True, WHITE, BLACK)
             screen.blit(value_1_r, (10, 240))
             screen.blit(units_r[1], (10, 215))
             display_update.append((0, 210, 180, 100))
         # Bottom left value update
-        if values[units[2]] != old_values[units[2]] or clear is True:
+        if values[units[2]] != old_values[units[2]] or clear:
             pygame.draw.rect(screen, BLACK, [0, 325, 180, 100], border_radius=10)
             value_2_r = font_60.render(str(values[units[2]]), True, WHITE, BLACK)
             screen.blit(value_2_r, (10, 355))
             screen.blit(units_r[2], (10, 330))
             display_update.append((0, 325, 180, 100))
         # Top right value update
-        if values[units[3]] != old_values[units[3]] or clear is True:
+        if values[units[3]] != old_values[units[3]] or clear:
             pygame.draw.rect(screen, BLACK, [RIGHT_SIDE, 95, 180, 100], border_radius=10)
             value_3_r = font_60.render(str(values[units[3]]), True, WHITE, BLACK)
             screen.blit(value_3_r, (RIGHT_SIDE + 10, 125))
             screen.blit(units_r[3], (RIGHT_SIDE + 10, 100))
             display_update.append((RIGHT_SIDE, 95, 180, 100))
         # Center right value update
-        if values[units[4]] != old_values[units[4]] or clear is True:
+        if values[units[4]] != old_values[units[4]] or clear:
             pygame.draw.rect(screen, BLACK, [RIGHT_SIDE, 210, 180, 100], border_radius=10)
             value_4_r = font_60.render(str(values[units[4]]), True, WHITE, BLACK)
             screen.blit(value_4_r, (RIGHT_SIDE + 10, 240))
             screen.blit(units_r[4], (RIGHT_SIDE + 10, 215))
             display_update.append((RIGHT_SIDE, 210, 180, 100))
         # Bottom right value update
-        if values[units[5]] != old_values[units[5]] or clear is True:
+        if values[units[5]] != old_values[units[5]] or clear:
             pygame.draw.rect(screen, BLACK, [RIGHT_SIDE, 325, 180, 100], border_radius=10)
             value_5_r = font_60.render(str(values[units[5]]), True, WHITE, BLACK)
             screen.blit(value_5_r, (RIGHT_SIDE + 10, 355))
@@ -530,7 +530,7 @@ while loop:
             display_update.append((RIGHT_SIDE, 325, 180, 100))
 
     # Gear update
-    if gear != old_gear or clear is True:
+    if gear != old_gear or clear:
         pygame.draw.rect(screen, BLACK, [CENTER_X - 40, 90, 80, 80], border_radius=10)
         old_gear = gear
         if gear == 0:
@@ -542,7 +542,7 @@ while loop:
             screen.blit(gear_r, (CENTER_X - one_digit_60[0] / 2, 95))
         display_update.append((CENTER_X - 40, 90, 80, 80))
     # Speed update
-    if speed != old_speed or clear is True:
+    if speed != old_speed or clear:
         old_speed = speed
         pygame.draw.rect(screen, BLACK, [CENTER_X - 110, 180, 220, 150], border_radius=10)
         speed_r = font_80.render(str(speed), True, WHITE, BLACK)
@@ -551,7 +551,7 @@ while loop:
         display_update.append((CENTER_X - 110, 180, 220, 150))
 
     clock = time.strftime("%H:%M")
-    if clock != old_clock or out_temp != old_out_temp or int(odometer) != int(old_odometer) or clear is True:
+    if clock != old_clock or out_temp != old_out_temp or int(odometer) != int(old_odometer) or clear:
         pygame.draw.rect(screen, BLACK, [CENTER_X - 110, 340, 220, 80], border_radius=10)
         screen.blit(CELSIUS_20, (CENTER_X + 75, 350))
         # Clock update
@@ -572,7 +572,7 @@ while loop:
         display_update.append((CENTER_X - 110, 340, 220, 80))
 
     # RPM Bar
-    if rpm != old_rpm or clear is True:
+    if rpm != old_rpm or clear:
         rpm_bar = int(rpm * 0.08)
         pygame.draw.rect(screen, BLACK, (0, 0, 800, 80))
         pygame.draw.rect(screen, LIGHT_BLUE, (0, 0, rpm_bar, 80))
@@ -581,8 +581,8 @@ while loop:
         old_rpm = rpm
         display_update.append((0, 0, 800, 80))
 
-    if old_left_blinker != left_blinker or clear is True:
-        if left_blinker is True:
+    if old_left_blinker != left_blinker or clear:
+        if left_blinker:
             blinker_colour = GREEN
         else:
             blinker_colour = BLACK
@@ -592,8 +592,8 @@ while loop:
         old_left_blinker = left_blinker
         display_update.append((bl[0] - 1, bl[1] - 17, 34, 34))
 
-    if old_right_blinker != right_blinker or clear is True:
-        if right_blinker is True:
+    if old_right_blinker != right_blinker or clear:
+        if right_blinker:
             blinker_colour = GREEN
         else:
             blinker_colour = BLACK
@@ -603,8 +603,8 @@ while loop:
         old_right_blinker = right_blinker
         display_update.append((br[0] - 33, bl[1] - 17, 34, 34))
 
-    if old_high_beam != high_beam or clear is True:
-        if high_beam is True:
+    if old_high_beam != high_beam or clear:
+        if high_beam:
             screen.blit(HIGH_BEAM_BLUE, (205, 350))
         else:
             screen.blit(HIGH_BEAM_BLACK, (205, 350))
@@ -617,7 +617,7 @@ while loop:
     elif fuel_level is not None and fuel_level > 10:
         refuel = False
 
-    if refuel != old_refuel or clear is True:
+    if refuel != old_refuel or clear:
         if refuel is False:
             screen.blit(FUEL_PUMP_BLACK, (545, 350))
         else:
@@ -634,7 +634,7 @@ while loop:
     if batt_v < 11.3 or batt_v < 13 and rpm > 0:
         error_list.append("Battery " + str(batt_v) + "V")
 
-    if error_list != old_error_list or cpu_timer < time.monotonic() or clear is True:
+    if error_list != old_error_list or cpu_timer < time.monotonic() or clear:
         cpu_timer = time.monotonic() + 1
         if len(error_list) == 0:
             pygame.draw.rect(screen, LIGHT_BLUE, (0, 440, 800, 40))
@@ -679,7 +679,7 @@ while loop:
                 units_memory.write(str(units[x]) + "\n")
             units_memory.close()
 
-    if draw_menu is True:
+    if draw_menu:
         screen.fill((60, 60, 60))
 
         def create_rect(x, y, text):
@@ -738,6 +738,6 @@ odometer = odometer_save(speed_sum, speed_sum_counter, distance_timer, odometer,
 pygame.quit()
 if TEST_MODE is False:
     close_io()
-if power_off is True:
+if power_off:
     print("Shutdown")
     os.system("shutdown -h now")
