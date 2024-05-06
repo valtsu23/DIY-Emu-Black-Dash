@@ -3,7 +3,7 @@ import time
 import struct
 
 # PC test mode
-TEST_MODE = False
+TEST_MODE = True
 
 # Screen size
 size = width, height = (800, 480)
@@ -326,6 +326,9 @@ while loop:
     if TEST_MODE or message is None:
         data = None
         message_id = None
+        rpm += 1
+        if "rpm" in units:
+            values["rpm"] = rpm
     # Reset countdown
     countdown = 10
 
@@ -474,6 +477,8 @@ while loop:
                 shift_light_off = True
 
         # Dimmer
+        #if time.monotonic() > dimmer_timer + .1:
+        #    dimmer_timer = time.monotonic()
         dark = is_dark()
         # If ambient light hasn't changed: reset timer
         if dark is old_dark:
@@ -493,6 +498,7 @@ while loop:
             screen.blit(value_0_r, (10, 125))
             screen.blit(units_r[0], (10, 100))
             display_update.append((0, 95, 180, 100))
+            print("toimii")
         # Center left value update
         if values[units[1]] != old_values[units[1]] or clear:
             pygame.draw.rect(screen, BLACK, [0, 210, 180, 100], border_radius=10)
@@ -528,6 +534,10 @@ while loop:
             screen.blit(value_5_r, (RIGHT_SIDE + 10, 355))
             screen.blit(units_r[5], (RIGHT_SIDE + 10, 330))
             display_update.append((RIGHT_SIDE, 325, 180, 100))
+        # Save old values
+        for x in range(6):
+            if values[units[x]] != old_values[units[x]] or clear is True:
+                old_values[units[x]] = values[units[x]]
 
     # Gear update
     if gear != old_gear or clear:
