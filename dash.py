@@ -495,7 +495,6 @@ while loop:
             screen.blit(value_0_r, (10, 125))
             screen.blit(units_r[0], (10, 100))
             display_update.append((0, 95, 180, 100))
-            print("toimii")
         # Center left value update
         if values[units[1]] != old_values[units[1]] or clear:
             pygame.draw.rect(screen, BLACK, [0, 210, 180, 100], border_radius=10)
