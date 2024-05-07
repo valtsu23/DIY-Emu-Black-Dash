@@ -70,6 +70,7 @@ old_left_blinker = None
 old_high_beam = None
 values = {x : 0 for x in units}
 old_values = {x : None for x in units}
+odometer_start = odometer
 clear = True
 loop = True
 touch = False
@@ -88,6 +89,8 @@ cpu_timer = time.monotonic()
 blink_timer = time.monotonic()
 dimmer_timer = time.monotonic()
 distance_timer = time.monotonic()
+
+test_message_order = 0
 
 # CONSTANTS
 ECU_CAN_ID = 0x600
@@ -457,7 +460,8 @@ while loop:
         if "fuel_used" in units:
             values["fuel_used"] = round(fuel_used, 1)
     if int(odometer) != int(old_odometer) and fuel_used is not None:
-        fuel_consum = round(fuel_used / ((odometer - old_odometer) / 100), 1)
+        fuel_consum = round(fuel_used / ((odometer - odometer_start) / 100), 1)
+        print(odometer - odometer_start)
         if "fuel_consum" in units:
             values["fuel_consum"] = fuel_consum
 
@@ -573,8 +577,7 @@ while loop:
             out_temp_location = out_temp_location[0] + 7,  343
         screen.blit(out_temp_r, out_temp_location)
         # Odometer update
-        if int(odometer) != int(old_odometer):
-            old_odometer = odometer
+        old_odometer = odometer
         odometer_r = font_30.render(str(int(odometer)) + " km", True, WHITE, BLACK)
         screen.blit(odometer_r, (CENTER_X - 100, 383))
         display_update.append((CENTER_X - 110, 340, 220, 80))
