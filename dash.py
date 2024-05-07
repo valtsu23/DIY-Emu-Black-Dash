@@ -459,9 +459,8 @@ while loop:
         fuel_used = message[5] * 0.01
         if "fuel_used" in units:
             values["fuel_used"] = round(fuel_used, 1)
-    if int(odometer) != int(old_odometer) and fuel_used is not None:
+    if fuel_used is not None and clear or int(odometer) != int(old_odometer):
         fuel_consum = round(fuel_used / ((odometer - odometer_start) / 100), 1)
-        print(odometer - odometer_start)
         if "fuel_consum" in units:
             values["fuel_consum"] = fuel_consum
 
