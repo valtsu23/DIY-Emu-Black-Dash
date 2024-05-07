@@ -476,14 +476,15 @@ while loop:
         # Dimmer
         #if time.monotonic() > dimmer_timer + .1:
         #    dimmer_timer = time.monotonic()
-        dark = is_dark()
-        # If ambient light hasn't changed: reset timer
-        if dark is old_dark:
-            t1 = time.monotonic()
-        # If timer hasn't been reseted in 4 seconds: change brightness
-        if time.monotonic() > t1 + 4:
-            dimmer(dark)
-            old_dark = dark
+        if True:
+            dark = is_dark()
+            # If ambient light hasn't changed: reset timer
+            if dark is old_dark:
+                t1 = time.monotonic()
+            # If timer hasn't been reseted in 4 seconds: change brightness
+            if time.monotonic() > t1 + 4:
+                dimmer(dark)
+                old_dark = dark
 
     # To make sure a unit button is pressed in menu
     if units_ok:
