@@ -573,7 +573,8 @@ while loop:
             out_temp_location = out_temp_location[0] + 7,  343
         screen.blit(out_temp_r, out_temp_location)
         # Odometer update
-        old_odometer = odometer
+        if int(odometer) != int(old_odometer):
+            old_odometer = odometer
         odometer_r = font_30.render(str(int(odometer)) + " km", True, WHITE, BLACK)
         screen.blit(odometer_r, (CENTER_X - 100, 383))
         display_update.append((CENTER_X - 110, 340, 220, 80))
