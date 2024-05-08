@@ -1,6 +1,6 @@
-egt_2
-ign_ang
-ign_ang
-fuel_used
-iat
-iat
+clt_t
+oil_t
+oil_p
+rpm
+lambda
+fuel_level
