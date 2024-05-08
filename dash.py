@@ -477,9 +477,8 @@ while loop:
                 shift_light_off = True
 
         # Dimmer
-        #if time.monotonic() > dimmer_timer + .1:
-        #    dimmer_timer = time.monotonic()
-        if True:
+        if time.monotonic() > dimmer_timer + .1:
+            dimmer_timer = time.monotonic()
             dark = is_dark()
             # If ambient light hasn't changed: reset timer
             if dark is old_dark:
