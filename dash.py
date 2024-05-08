@@ -47,7 +47,7 @@ speed = 0
 gear = 0
 out_temp = 0
 fuel_level = None
-fuel_used = None
+fuel_used = 0
 raw_fuel_level = 0
 refuel = False
 batt_v = 0
@@ -188,7 +188,7 @@ def menu(pos):
 def is_dark():
     a_val = mcp3002.read_adc(0)
     # print(a_val)
-    if a_val < 300:
+    if a_val < 200:
         return True
     else:
         return False
@@ -459,10 +459,13 @@ while loop:
         fuel_used = message[5] * 0.01
         if "fuel_used" in units:
             values["fuel_used"] = round(fuel_used, 1)
-    if fuel_used is not None and clear or int(odometer) != int(old_odometer):
-        fuel_consum = round(fuel_used / ((odometer - odometer_start) / 100), 1)
-        if "fuel_consum" in units:
-            values["fuel_consum"] = fuel_consum
+
+    if clear or int(odometer) != int(old_odometer):
+        trip = odometer - odometer_start
+        if fuel_used != 0 and trip != 0:
+            fuel_consum = round(fuel_used / ((trip) / 100), 1)
+            if "fuel_consum" in units:
+                values["fuel_consum"] = fuel_consum
 
     # Shift light
     if TEST_MODE is False:
@@ -477,8 +480,9 @@ while loop:
                 shift_light_off = True
 
         # Dimmer
-        if time.monotonic() > dimmer_timer + .1:
-            dimmer_timer = time.monotonic()
+        #if time.monotonic() > dimmer_timer + .1:
+        #    dimmer_timer = time.monotonic()
+        if True:
             dark = is_dark()
             # If ambient light hasn't changed: reset timer
             if dark is old_dark:
@@ -734,7 +738,7 @@ while loop:
         fuel_used_button = create_rect(coordinates_x[1], coordinates_y[5], "Fuel used")
         fuel_level_button = create_rect(coordinates_x[2], coordinates_y[5], "Fuel level")
         fuel_consumption_button = create_rect(coordinates_x[3], coordinates_y[5], "Fuel consum.")
-
+        
         pygame.display.flip()
         draw_menu = False
 
