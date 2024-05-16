@@ -49,6 +49,8 @@ Raspberry Pi 4 handles the communicatin with all the hardware. Can bus communica
   - 2x13 female smd pin header (soldered to display pcb)
   - 1x40 male pin header
   - 0,22mm2 - 0,5mm2 wires (0,5mm2 recommended for power and ground)
+### From tme.eu
+  - MCP2562
 #### From Berrybase.de
   - NeoPixel Stick mit 8 WS2812 5050 RGB LEDs (Copy of Adafruit's product. Dimensions won't match)
 #### From www.adafruit.com
