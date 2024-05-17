@@ -11,6 +11,13 @@ Biggest difference to previously mentioned is PCB. Now there isn't an additional
   - Add video
   - Raspberry Pi 5 version is also coming at some point
 
+### Technical specs:
+- Raspberry Pi 4 Model B 4GB
+- SanDisk Extreme Pro UHS-I U3 64GB microSD
+- 5" sunlight readable display with touchscreen from Makerplane:
+  - https://store.makerplane.org/5-sunlight-readable-touchscreen-hdmi-display-for-raspberry-pi/
+- DIY PCB inside the enclosure
+
 ### Hardware features
 Raspberry Pi 4 handles the communicatin with all the hardware via SPI and I2C. Can bus communication with MCP2515, ADC (MCP3002) reads light sensor values and Raspberry Pi adjusts screen brightness based on ambient light. DS3231 RTC to keep the clock in time. Neopixels for shiftlight. 12v to 5v DC-DC converter on board. Device needs switched 12V and continous 12v from battery to work correctly. Continous power is connected to a relay on PCB. Switched power wakes up the device and Raspberry pi starts booting and relay turns on. When Can Bus stream is lost Raspberry pi automatically starts shutdown process. After shutdown the relay turns off and cuts power from the device. The device doesn't consume any power after shutdown. Small button as a failsafe if Raspberry Pi crashes (pressing thins buttons turns relay off). 
 
