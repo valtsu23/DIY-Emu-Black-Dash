@@ -3,7 +3,7 @@ This readme is still on progress.
 # DIY-Emu-Black-Dash
 Raspberry pi based digital dash working with Ecumaster Emu Black. 
 Based on https://github.com/valtsu23/Raspberry_Pi_gauge_cluster .
-Biggest difference to above is PCB. Now there isn't an additional microcontroller. 
+Biggest difference to previously mentioned is PCB. Now there isn't an additional microcontroller. Also parts of the program had to be rewritten to support new hardware. 
 
 ### To do
   - More testing
