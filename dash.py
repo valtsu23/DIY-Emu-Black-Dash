@@ -208,6 +208,7 @@ def dimmer(value):
 if TEST_MODE is False:
     old_dark = is_dark()
     dimmer(old_dark)
+    t1 = time.monotonic()
 
 # Return CPU temperature and CPU clock as a character string
 def getCPUtemperature():
