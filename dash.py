@@ -87,7 +87,8 @@ shift_light_off = False
 power_off = False
 cpu_timer = time.monotonic()
 blink_timer = time.monotonic()
-dimmer_timer = time.monotonic()
+dimmer_timer_1 = time.monotonic()
+dimmer_timer_4 = time.monotonic()
 distance_timer = time.monotonic()
 
 test_message_order = 0
@@ -208,7 +209,6 @@ def dimmer(value):
 if TEST_MODE is False:
     old_dark = is_dark()
     dimmer(old_dark)
-    t1 = time.monotonic()
 
 # Return CPU temperature and CPU clock as a character string
 def getCPUtemperature():
@@ -378,7 +378,6 @@ while loop:
             elif start_up is False and fuel_level < old_fuel_level:
                 fuel_level = old_fuel_level - 1
             old_fuel_level = fuel_level
-            start_up = False
         if "fuel_level" in units:
             values["fuel_level"] = fuel_level
 
@@ -480,15 +479,15 @@ while loop:
                 shift_light_v2.leds_off()
                 shift_light_off = True
 
-        # Dimmer
-        if time.monotonic() > dimmer_timer + .1:
-            dimmer_timer = time.monotonic()
+        # Dimmer (10Hz update rate from ADC)
+        if time.monotonic() > dimmer_timer_1:
+            dimmer_timer_1 = time.monotonic() + .1
             dark = is_dark()
             # If ambient light hasn't changed: reset timer
             if dark is old_dark:
-                t1 = time.monotonic()
+                dimmer_timer_4 = time.monotonic() + 4
             # If timer hasn't been reseted in 4 seconds: change brightness
-            if time.monotonic() > t1 + 4:
+            if time.monotonic() > dimmer_timer_4:
                 dimmer(dark)
                 old_dark = dark
 
@@ -647,6 +646,7 @@ while loop:
     if batt_v < 11.3 or batt_v < 13 and rpm > 0:
         error_list.append("Battery " + str(batt_v) + "V")
 
+    # 1Hz update rate on cpu statistics
     if error_list != old_error_list or cpu_timer < time.monotonic() or clear:
         cpu_timer = time.monotonic() + 1
         if len(error_list) == 0:
@@ -741,7 +741,8 @@ while loop:
         
         pygame.display.flip()
         draw_menu = False
-
+    
+    start_up = False
     # Update screen
     if unit_change is None:
         pygame.display.update(display_update)
