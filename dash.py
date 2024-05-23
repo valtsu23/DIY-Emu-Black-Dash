@@ -330,7 +330,7 @@ while loop:
     if TEST_MODE or message is None:
         data = None
         message_id = None
-    # Reset countdown
+    # Reset shutdown countdown
     countdown = 10
 
     # List of what to update on the screen
