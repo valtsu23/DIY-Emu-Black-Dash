@@ -16,7 +16,7 @@ if TEST_MODE is False:
     import mcp3002
     import shift_light_v2
     from rpi_hardware_pwm import HardwarePWM
-    screen = pygame.display.set_mode(size, pygame.FULLSCREEN)
+    screen = pygame.display.set_mode(size)
     pygame.mouse.set_visible(False)
     PATH = "/home/your_user_name/Dash/"
     # Can bus
@@ -29,7 +29,7 @@ if TEST_MODE is False:
     backlight.start(70)
 else:
     screen = pygame.display.set_mode(size)
-    PATH = "P:/Raspberry_pi/EMU_display_mcp/"
+    PATH = ""
 
 # Read needed files
 units_memory = open(PATH + "units_memory.txt", "r")
@@ -91,12 +91,10 @@ dimmer_timer_1 = time.monotonic()
 dimmer_timer_4 = time.monotonic()
 distance_timer = time.monotonic()
 
-test_message_order = 0
-
 # CONSTANTS
 ECU_CAN_ID = 0x600
 FUEL_MAX = 197
-FUEL_MIN = 37
+FUEL_MIN = 36
 FUEL_DIVIDER = (FUEL_MAX - FUEL_MIN) / 100
 CENTER_X, CENTER_Y = (width / 2, height / 2)
 RIGHT_SIDE = width - 180
@@ -186,13 +184,15 @@ def menu(pos):
         return "fuel_consum"
 
 # Read light sensor value
-def is_dark():
+def is_dark(old_value):
     a_val = mcp3002.read_adc(0)
     # print(a_val)
-    if a_val < 200:
+    if a_val < 150:
         return True
-    else:
+    elif a_val > 250:
         return False
+    else:
+        return old_value
 
 # Dimmer
 def dimmer(value):
@@ -207,7 +207,7 @@ def dimmer(value):
         led_br = 80
 
 if TEST_MODE is False:
-    old_dark = is_dark()
+    old_dark, adc = is_dark(True)
     dimmer(old_dark)
 
 # Return CPU temperature and CPU clock as a character string
@@ -327,6 +327,7 @@ while loop:
         else:
             data = message.data
             message_id = message.arbitration_id
+            dlc = message.dlc
     if TEST_MODE or message is None:
         data = None
         message_id = None
@@ -342,7 +343,7 @@ while loop:
         old_values = {x : None for x in units}
         pygame.display.flip()
 
-    if message_id == 0x400:
+    if message_id == 0x400 and dlc == 3:
         message = struct.unpack("<BBb", data)
         bit_list_3 = bitfield_3_return(message[0])
         # High beam input is inverted
@@ -378,10 +379,11 @@ while loop:
             elif start_up is False and fuel_level < old_fuel_level:
                 fuel_level = old_fuel_level - 1
             old_fuel_level = fuel_level
+            start_up = False
         if "fuel_level" in units:
             values["fuel_level"] = fuel_level
 
-    if message_id == ECU_CAN_ID:
+    if message_id == ECU_CAN_ID and dlc == 8:
         # Unpack message
         message = struct.unpack("<HBbHH", data)
         rpm = message[0]
@@ -396,7 +398,7 @@ while loop:
         if "inj_pw" in units:
             values["inj_pw"] = round(message[4] * 0.016129, 1)
 
-    elif message_id == ECU_CAN_ID + 2:
+    elif message_id == ECU_CAN_ID + 2 and dlc == 8:
         message = struct.unpack("<HBBBBh", data)
         speed = message[0]
         # Odometer
@@ -417,7 +419,7 @@ while loop:
         if "clt_t" in units:
             values["clt_t"] = message[5]
 
-    elif message_id == ECU_CAN_ID + 3:
+    elif message_id == ECU_CAN_ID + 3 and dlc == 8:
         message = struct.unpack("<bBBBHH", data)
         if "ign_ang" in units:
             values["ign_ang"] = message[0] * 0.5
@@ -432,7 +434,7 @@ while loop:
         if "egt_2" in units:
             values["egt_2"] = message[5]
 
-    elif message_id == ECU_CAN_ID + 4:
+    elif message_id == ECU_CAN_ID + 4 and dlc == 8:
         message = struct.unpack("<BbHHBB", data)
         gear = message[0]
         batt_v = round(message[2] * 0.027, 1)
@@ -443,12 +445,12 @@ while loop:
         if "ethanol_cont" in units:
             values["ethanol_cont"] = message[5]
 
-    elif message_id == ECU_CAN_ID + 5:
+    elif message_id == ECU_CAN_ID + 5 and dlc == 8:
         message = struct.unpack("<BBhHBB", data)
         if "dbw_pos" in units:
             values["dbw_pos"] = int(message[0] * 0.5)
 
-    elif message_id == ECU_CAN_ID + 7:
+    elif message_id == ECU_CAN_ID + 7 and dlc == 8:
         message = struct.unpack("<HBBBBH", data)
         if "boost_t" in units:
             values["boost_t"] = message[0]
@@ -482,7 +484,7 @@ while loop:
         # Dimmer (10Hz update rate from ADC)
         if time.monotonic() > dimmer_timer_1:
             dimmer_timer_1 = time.monotonic() + .1
-            dark = is_dark()
+            dark = is_dark(old_dark)
             # If ambient light hasn't changed: reset timer
             if dark is old_dark:
                 dimmer_timer_4 = time.monotonic() + 4
@@ -653,8 +655,9 @@ while loop:
             pygame.draw.rect(screen, LIGHT_BLUE, (0, 440, 800, 40))
             cpu_temp = getCPUtemperature()
             cpu_clock = getCPUclock()
-            cpu_stats_text = font_30.render("Cpu: " + cpu_temp + ", " + cpu_clock + " MHz",
-                                            True, WHITE, LIGHT_BLUE)
+            # Showing ADC just for testing
+            cpu_stats_text = font_30.render("Cpu: " + cpu_temp + ", " + cpu_clock +
+                                            " MHz", True, WHITE, LIGHT_BLUE)
             screen.blit(cpu_stats_text, (0, 443))
         else:
             errors_text = font_30.render("Errors " + str(len(error_list)) + ": ", True, WHITE, RED)
@@ -738,11 +741,10 @@ while loop:
         fuel_used_button = create_rect(coordinates_x[1], coordinates_y[5], "Fuel used")
         fuel_level_button = create_rect(coordinates_x[2], coordinates_y[5], "Fuel level")
         fuel_consumption_button = create_rect(coordinates_x[3], coordinates_y[5], "Fuel consum.")
-        
+
         pygame.display.flip()
         draw_menu = False
-    
-    start_up = False
+
     # Update screen
     if unit_change is None:
         pygame.display.update(display_update)
