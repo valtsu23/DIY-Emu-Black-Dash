@@ -187,7 +187,7 @@ def menu(pos):
 def is_dark(old_value):
     a_val = mcp3002.read_adc(0)
     # print(a_val)
-    if a_val < 150:
+    if a_val < 50:
         return True
     elif a_val > 250:
         return False
