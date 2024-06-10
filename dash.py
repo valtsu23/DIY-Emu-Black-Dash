@@ -207,7 +207,7 @@ def dimmer(value):
         led_br = 80
 
 if TEST_MODE is False:
-    old_dark, adc = is_dark(True)
+    old_dark = is_dark(True)
     dimmer(old_dark)
 
 # Return CPU temperature and CPU clock as a character string
