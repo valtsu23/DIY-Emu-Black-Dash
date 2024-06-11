@@ -7,6 +7,7 @@ TEST_MODE = False
 
 # Screen size
 size = width, height = (800, 480)
+screen = pygame.display.set_mode(size)
 pygame.display.init()
 pygame.font.init()
 
@@ -16,7 +17,6 @@ if TEST_MODE is False:
     import mcp3002
     import shift_light_v2
     from rpi_hardware_pwm import HardwarePWM
-    screen = pygame.display.set_mode(size)
     pygame.mouse.set_visible(False)
     PATH = "/home/your_user_name/Dash/"
     # Can bus
@@ -28,7 +28,6 @@ if TEST_MODE is False:
     backlight = HardwarePWM(pwm_channel=0, hz=500, chip=0)
     backlight.start(70)
 else:
-    screen = pygame.display.set_mode(size)
     PATH = ""
 
 # Read needed files
@@ -331,6 +330,7 @@ while loop:
     if TEST_MODE or message is None:
         data = None
         message_id = None
+        dlc = None
     # Reset shutdown countdown
     countdown = 10
 
