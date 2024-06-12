@@ -88,3 +88,11 @@ Raspberry Pi 4 handles the communicatin with all the hardware via SPI and I2C. C
 
 
 ![Alt PCB](https://filedn.com/lKOo3aQn9ubHtKC7DXLEkHh/DIY-Emu-Black-Dash/IMG_20240528_233423409.jpg)
+
+![Alt Inside](https://filedn.com/lKOo3aQn9ubHtKC7DXLEkHh/DIY-Emu-Black-Dash/IMG_20240528_234437181.jpg)
+
+![Alt Case1](https://filedn.com/lKOo3aQn9ubHtKC7DXLEkHh/DIY-Emu-Black-Dash/IMG_20240528_234606426.jpg)
+
+![Alt Case2](https://filedn.com/lKOo3aQn9ubHtKC7DXLEkHh/DIY-Emu-Black-Dash/IMG_20240528_234642311.jpg)
+
+![Alt Case3](https://filedn.com/lKOo3aQn9ubHtKC7DXLEkHh/DIY-Emu-Black-Dash/IMG_20240528_234623667.jpg)
