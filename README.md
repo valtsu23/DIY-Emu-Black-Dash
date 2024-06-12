@@ -85,3 +85,6 @@ Raspberry Pi 4 handles the communicatin with all the hardware via SPI and I2C. C
   - Pololu Step-Down Voltage Converter D24V22F5 - 5V 2,5A 2858
 #### From www.ebay.com
   - 5pin JST-SM connector pair
+
+
+![Alt PCB](https://filedn.com/lKOo3aQn9ubHtKC7DXLEkHh/DIY-Emu-Black-Dash/IMG_20240528_233423409.jpg)
