@@ -78,7 +78,7 @@ Raspberry Pi 4 handles the communicatin with all the hardware via SPI and I2C. C
   - MCP2515-I/P
   - MCP2562-E/P
   - IC SOCKET 18-PINS (optional)
-  - IC SOCKET 8-PINS (optional)
+  - IC SOCKET 8-PINS 2pcs (optional)
   - FTR-F3AA005V
 #### From www.Berrybase.de
   - NeoPixel Stick mit 8 WS2812 5050 RGB LEDs (Copy of Adafruit's product. Dimensions won't match)
