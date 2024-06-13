@@ -6,7 +6,7 @@ Based on https://github.com/valtsu23/Raspberry_Pi_gauge_cluster .
 Biggest difference to previously mentioned is PCB. Now there isn't an additional microcontroller. Also parts of the program had to be rewritten to support new hardware. 
 
 ### Additional data
-Video: https://youtu.be/x8BvJFvcHbc
+[Video:](https://youtu.be/x8BvJFvcHbc) 
 Raspberry Pi setup guide: https://filedn.com/lKOo3aQn9ubHtKC7DXLEkHh/DIY-Emu-Black-Dash/Raspberry%20Pi%20setup%20guide.pdf
 Case and pcb files: https://filedn.com/lKOo3aQn9ubHtKC7DXLEkHh/DIY-Emu-Black-Dash/Case%20and%20Pcb%20files.zip
 
