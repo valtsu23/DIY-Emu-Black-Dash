@@ -75,7 +75,6 @@ Raspberry Pi 4 handles the communicatin with all the hardware via SPI and I2C. C
   - 2x13 female smd pin header (soldered to display pcb)
   - 1x40 male pin header
   - 0,22mm2 - 0,5mm2 wires (0,5mm2 recommended for power and ground)
-### From www.tme.eu
   - MCP2515-I/P
   - MCP2562-E/P
   - IC SOCKET 18-PINS (optional)
