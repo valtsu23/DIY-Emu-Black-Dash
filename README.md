@@ -1,4 +1,6 @@
-This readme is still on progress.
+![Working Dash](https://filedn.com/lKOo3aQn9ubHtKC7DXLEkHh/DIY-Emu-Black-Dash/IMG_20240612_141538698.jpg)
+
+Video: https://youtu.be/x8BvJFvcHbc
 
 # DIY-Emu-Black-Dash
 Raspberry pi based digital dash working with Ecumaster Emu Black. 
@@ -7,8 +9,6 @@ Biggest difference to previously mentioned is PCB. Now there isn't an additional
 
 ### To do
   - More testing
-  - Add pictures
-  - Add video
   - Raspberry Pi 5 version is also coming at some point
 
 ### Technical specs:
