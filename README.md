@@ -8,7 +8,8 @@ Biggest difference to previously mentioned is PCB. Now there isn't an additional
 ### Additional data
   - [Video](https://youtu.be/x8BvJFvcHbc) 
   - [Raspberry Pi setup guide](https://filedn.com/lKOo3aQn9ubHtKC7DXLEkHh/DIY-Emu-Black-Dash/Raspberry%20Pi%20setup%20guide.pdf)
-  - [Case and pcb files](https://filedn.com/lKOo3aQn9ubHtKC7DXLEkHh/DIY-Emu-Black-Dash/Case%20and%20Pcb%20files.zip)
+  - [Case and pcb files](https://filedn.com/lKOo3aQn9ubHtKC7DXLEkHh/DIY-Emu-Black-Dash/Case%20and%20Pcb%20files.zip) (Used software: Freecad and Fusion 360)
+  - [Pcb schematic in pdf](https://filedn.com/lKOo3aQn9ubHtKC7DXLEkHh/DIY-Emu-Black-Dash/PCB_schematic.pdf)
 
 ### To do
   - More testing
