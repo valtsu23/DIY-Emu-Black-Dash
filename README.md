@@ -13,7 +13,8 @@ Biggest difference to previously mentioned is PCB. Now there isn't an additional
 
 ### To do
   - More testing
-  - Raspberry Pi 5 version is also coming at some point
+
+Raspberry Pi 5 version: https://github.com/valtsu23/DIY-Emu-Black-Dash-Rpi5
 
 ### Technical specs:
 - Raspberry Pi 4 Model B 4GB
