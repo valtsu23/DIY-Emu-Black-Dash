@@ -50,6 +50,7 @@ Raspberry Pi 4 handles the communicatin with all the hardware via SPI and I2C. C
   - Ambient temperature
 
 ### Case
+- Designed for Rpi4 and Rpi5
 - Designed with FreeCAD
 - Filament is PETG
 - M3x6 machine screws 2 pcs
