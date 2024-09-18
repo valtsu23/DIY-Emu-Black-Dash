@@ -17,7 +17,7 @@ Biggest difference to previously mentioned is PCB. Now there isn't an additional
 Raspberry Pi 5 version: https://github.com/valtsu23/DIY-Emu-Black-Dash-Rpi5
 
 ### Technical specs:
-- Raspberry Pi 4 Model B 4GB
+- Raspberry Pi 4 Model B 4GB (Will work even with 1Gb version)
 - SanDisk Extreme Pro UHS-I U3 64GB microSD
 - 5" sunlight readable display with touchscreen from Makerplane:
   - https://store.makerplane.org/5-sunlight-readable-touchscreen-hdmi-display-for-raspberry-pi/
