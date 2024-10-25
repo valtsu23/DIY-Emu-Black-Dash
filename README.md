@@ -7,7 +7,7 @@ Biggest difference to previously mentioned is PCB. Now there isn't an additional
 
 ### Version history
 25.10.2024 released version 1.1
-  - Cpu clock monitoring replaced with cpu load using psutil ilbrary
+  - Cpu clock monitoring replaced with cpu load using Psutil ilbrary
 
 ### Additional data
   - [Video](https://youtu.be/x8BvJFvcHbc) 
