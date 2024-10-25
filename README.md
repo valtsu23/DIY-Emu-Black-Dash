@@ -5,6 +5,10 @@ Raspberry pi based digital dash working with Ecumaster Emu Black.
 Based on https://github.com/valtsu23/Raspberry_Pi_gauge_cluster .
 Biggest difference to previously mentioned is PCB. Now there isn't an additional microcontroller. Also parts of the program had to be rewritten to support new hardware. 
 
+### Version history
+25.10.2024 released version 1.1
+  - Cpu clock monitoring replaced with cpu load using psutil ilbrary
+
 ### Additional data
   - [Video](https://youtu.be/x8BvJFvcHbc) 
   - [Raspberry Pi setup guide](https://filedn.com/lKOo3aQn9ubHtKC7DXLEkHh/DIY-Emu-Black-Dash/Raspberry%20Pi%20setup%20guide.pdf)
