@@ -1,3 +1,6 @@
+# Raspberry pi 4 version
+# Version 1.1: Cpu clock monitoring replaced with cpu load monitoring using Psutil
+
 import pygame
 import time
 import struct
@@ -7,7 +10,6 @@ TEST_MODE = False
 
 # Screen size
 size = width, height = (800, 480)
-screen = pygame.display.set_mode(size)
 pygame.display.init()
 pygame.font.init()
 
@@ -15,8 +17,11 @@ if TEST_MODE is False:
     import os
     import can
     import mcp3002
+    import psutil
     import shift_light_v2
     from rpi_hardware_pwm import HardwarePWM
+    psutil.cpu_percent()
+    screen = pygame.display.set_mode(size, pygame.FULLSCREEN)
     pygame.mouse.set_visible(False)
     PATH = "/home/your_user_name/Dash/"
     # Can bus
@@ -28,7 +33,8 @@ if TEST_MODE is False:
     backlight = HardwarePWM(pwm_channel=0, hz=500, chip=0)
     backlight.start(70)
 else:
-    PATH = ""
+    screen = pygame.display.set_mode(size)
+    PATH = "P:/Raspberry_pi/EMU_display_mcp/"
 
 # Read needed files
 units_memory = open(PATH + "units_memory.txt", "r")
@@ -186,7 +192,7 @@ def menu(pos):
 def is_dark(old_value):
     a_val = mcp3002.read_adc(0)
     # print(a_val)
-    if a_val < 50:
+    if a_val < 150:
         return True
     elif a_val > 250:
         return False
@@ -206,20 +212,14 @@ def dimmer(value):
         led_br = 80
 
 if TEST_MODE is False:
-    old_dark = is_dark(True)
+    old_dark= is_dark(True)
     dimmer(old_dark)
 
-# Return CPU temperature and CPU clock as a character string
+# Return CPU temperature as a character string
 def getCPUtemperature():
     temp = os.popen('vcgencmd measure_temp').readline()
     temp = temp.replace("temp=", "")
     return temp.replace("'C\n", "°C")
-
-def getCPUclock():
-    clock = os.popen('vcgencmd measure_clock arm').readline()
-    clock = clock.replace("frequency(48)=", "")
-    clock = int(clock)/1000000
-    return str(int(clock))
 
 def error_flags(number):
     # Convert to bit list
@@ -654,10 +654,9 @@ while loop:
         if len(error_list) == 0:
             pygame.draw.rect(screen, LIGHT_BLUE, (0, 440, 800, 40))
             cpu_temp = getCPUtemperature()
-            cpu_clock = getCPUclock()
-            # Showing ADC just for testing
-            cpu_stats_text = font_30.render("Cpu: " + cpu_temp + ", " + cpu_clock +
-                                            " MHz", True, WHITE, LIGHT_BLUE)
+            cpu_load = str(psutil.cpu_percent())
+            cpu_stats_text = font_30.render("Cpu: " + cpu_temp + ", " + cpu_load +
+                                            " %", True, WHITE, LIGHT_BLUE)
             screen.blit(cpu_stats_text, (0, 443))
         else:
             errors_text = font_30.render("Errors " + str(len(error_list)) + ": ", True, WHITE, RED)
