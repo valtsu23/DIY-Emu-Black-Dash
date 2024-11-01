@@ -63,7 +63,8 @@ Raspberry Pi 4 handles the communicatin with all the hardware via SPI and I2C. C
 - M4x20 machine screw 2pcs
 - M4 nut 2pcs
 
-### Part list for PCB:
+### Parts for PCB
+  - PCB was ordered from jlcpcb.com:
 #### From www.partco.fi
   - MCP3002-I/P
   - 3A diode 
