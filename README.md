@@ -66,8 +66,7 @@ Raspberry Pi 4 handles the communicatin with all the hardware via SPI and I2C. C
 - M4 nut 2pcs
 
 ### Parts for PCB
-#### Please note that the PCB is designed to work with the display from Makerplane. You cannot use it without the display. 
-#### PCB was ordered from www.jlcpcb.com (order stats can be found from pcb files):
+#### Please note that the PCB is designed to work with the display from Makerplane. You cannot use it without the display. PCB was ordered from www.jlcpcb.com (order stats can be found from pcb files):
 #### From www.partco.fi
   - MCP3002-I/P
   - 3A diode 
