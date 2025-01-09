@@ -18,7 +18,7 @@ Biggest difference to previously mentioned is PCB. Now there isn't an additional
   - [Pcb schematic in pdf](https://filedn.com/lKOo3aQn9ubHtKC7DXLEkHh/DIY-Emu-Black-Dash/PCB_schematic.pdf)
 
 ### To do
-  - More testing
+  - Design a PCB what works like a Rpi Hat and works with any display
 
 Raspberry Pi 5 version: https://github.com/valtsu23/DIY-Emu-Black-Dash-Rpi5
 
@@ -66,6 +66,7 @@ Raspberry Pi 4 handles the communicatin with all the hardware via SPI and I2C. C
 - M4 nut 2pcs
 
 ### Parts for PCB
+#### Please note that the PCB is designed to work with the display from Makerplane. You cannot use it without the display. 
 #### PCB was ordered from www.jlcpcb.com (order stats can be found from pcb files):
 #### From www.partco.fi
   - MCP3002-I/P
