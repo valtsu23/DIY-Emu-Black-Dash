@@ -1,4 +1,4 @@
-![Working Dash](https://github.com/valtsu23/Pictures/blob/main/DIY-Emu-Black-Dash/IMG_20240612_141538698.jpg?raw=true)
+![Working Dash](https://github.com/valtsu23/Pictures/blob/main/DIY-Emu-Black-Dash/IMG_20240612_141538698.jpg)
 
 # DIY-Emu-Black-Dash
 Raspberry pi based digital dash working with Ecumaster Emu Black. 
