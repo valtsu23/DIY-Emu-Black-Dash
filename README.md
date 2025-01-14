@@ -11,9 +11,9 @@ Biggest difference to previously mentioned is PCB. Now there isn't an additional
 
 ### Additional data
   - [Video](https://youtu.be/x8BvJFvcHbc) 
-  - [Raspberry Pi setup guide](https://filedn.com/lKOo3aQn9ubHtKC7DXLEkHh/DIY-Emu-Black-Dash/Raspberry%20Pi%20setup%20guide.pdf)
-  - [Case and pcb files](https://filedn.com/lKOo3aQn9ubHtKC7DXLEkHh/DIY-Emu-Black-Dash/Case%20and%20Pcb%20files.zip) (Used software: FreeCAD and Fusion 360)
-  - [Pcb schematic in pdf](https://filedn.com/lKOo3aQn9ubHtKC7DXLEkHh/DIY-Emu-Black-Dash/PCB_schematic.pdf)
+  - [Raspberry Pi setup guide](https://drive.google.com/file/d/1KZesWHl7KMY-lIX4NdqELxCj08oUjc0y/view?usp=sharing)
+  - [Case and pcb files](https://drive.google.com/file/d/16hSwiSBqhmkN8jAcquyTdep4fbnegLqo/view?usp=sharing) (Used software: FreeCAD and Fusion 360)
+  - [Pcb schematic in pdf](https://drive.google.com/file/d/1KawKwaSzzWXQF_xuIObFZ1UPyJIFHP33/view?usp=drive_link)
 
 ### To do
   - Design a PCB what works like a Rpi Hat and works with any display
@@ -97,12 +97,12 @@ Raspberry Pi 4 handles the communicatin with all the hardware via SPI and I2C. C
   - 5pin JST-SM connector pair
 
 
-![Alt PCB](https://filedn.com/lKOo3aQn9ubHtKC7DXLEkHh/DIY-Emu-Black-Dash/IMG_20240528_233423409.jpg)
+![Alt PCB](https://github.com/valtsu23/Pictures/blob/main/DIY-Emu-Black-Dash/IMG_20240528_233423409.jpg)
 
-![Alt Inside](https://filedn.com/lKOo3aQn9ubHtKC7DXLEkHh/DIY-Emu-Black-Dash/IMG_20240528_234437181.jpg)
+![Alt Inside](https://github.com/valtsu23/Pictures/blob/main/DIY-Emu-Black-Dash/IMG_20240528_234437181.jpg)
 
-![Alt Case1](https://filedn.com/lKOo3aQn9ubHtKC7DXLEkHh/DIY-Emu-Black-Dash/IMG_20240528_234606426.jpg)
+![Alt Case1](https://github.com/valtsu23/Pictures/blob/main/DIY-Emu-Black-Dash/IMG_20240528_234606426.jpg)
 
-![Alt Case2](https://filedn.com/lKOo3aQn9ubHtKC7DXLEkHh/DIY-Emu-Black-Dash/IMG_20240528_234642311.jpg)
+![Alt Case2](https://github.com/valtsu23/Pictures/blob/main/DIY-Emu-Black-Dash/IMG_20240528_234642311.jpg)
 
-![Alt Case3](https://filedn.com/lKOo3aQn9ubHtKC7DXLEkHh/DIY-Emu-Black-Dash/IMG_20240528_234623667.jpg)
+![Alt Case3](https://github.com/valtsu23/Pictures/blob/main/DIY-Emu-Black-Dash/IMG_20240528_234623667.jpg)
