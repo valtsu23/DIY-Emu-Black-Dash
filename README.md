@@ -109,7 +109,7 @@ Raspberry Pi 4 handles the communicatin with all the hardware via SPI and I2C. C
 
 ![Alt Case3](https://github.com/valtsu23/Pictures/blob/main/DIY-Emu-Black-Dash/IMG_20240528_234623667.jpg)
 
-### Here is a Hat PCB that is designed to work with any display. Functions are the same, but DS3231 RTC cannot be mounted on the pcb, but I added pins where it's possible to connect the RTC.
+### Here is a Hat PCB that is designed to work with any display. Functions are the same, but DS3231 RTC cannot be mounted on the pcb, but I added pins where it's possible to connect the RTC. There is also connector for Raspberry Pi touch 2 display power. 
 ![Alt Hat PCB](https://github.com/valtsu23/Pictures/blob/main/DIY-Emu-Black-Dash/IMG_20250207_003403716.jpg)
 
 ![Alt Hat PCB](https://github.com/valtsu23/Pictures/blob/main/DIY-Emu-Black-Dash/IMG_20250207_003448921.jpg)
