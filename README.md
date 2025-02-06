@@ -64,7 +64,6 @@ Raspberry Pi 4 handles the communicatin with all the hardware via SPI and I2C. C
 - M4 nut 2pcs
 
 ### Parts for PCB
-#### Please note that the PCB is designed to work with the display from Makerplane. You cannot use it without the display. PCB was ordered from www.jlcpcb.com (order stats can be found from pcb files):
 #### From www.partco.fi
   - MCP3002-I/P
   - 3A diode 
@@ -79,8 +78,6 @@ Raspberry Pi 4 handles the communicatin with all the hardware via SPI and I2C. C
   - 10K 0,6w resistor
   - 2K2 0,6w resistor
   - 1M 0,6w resistor 
-  - 2x13 male pin header with long pins (20mm total length)
-  - 2x13 female smd pin header (soldered to display pcb)
   - 1x40 male pin header
   - 0,22mm2 - 0,5mm2 wires (0,5mm2 recommended for power and ground)
   - MCP2515-I/P
@@ -88,6 +85,14 @@ Raspberry Pi 4 handles the communicatin with all the hardware via SPI and I2C. C
   - IC SOCKET 18-PINS (optional)
   - IC SOCKET 8-PINS 2pcs (optional)
   - FTR-F3AA005V
+#### From partco.fi, when using PCB designed for Makerplane display
+  - 2x13 male pin header with long pins (20mm total length)
+  - 2x13 female smd pin header
+#### From tme.eu, when using PCB on top of Raspberry Pi
+  - 2x20 female pin header with long pins SSQ-120-03-T-D
+  - M2.5 screw spacer 16mm 222X16DREMEC 4pcs
+  - M2.5x6 countersunk screw 4pcs
+  - M2.5 nuts 4pcs
 #### From www.Berrybase.de
   - NeoPixel Stick mit 8 WS2812 5050 RGB LEDs (Copy of Adafruit's product. Dimensions won't match)
 #### From www.botland.store/
@@ -96,7 +101,7 @@ Raspberry Pi 4 handles the communicatin with all the hardware via SPI and I2C. C
 #### From www.ebay.com
   - 5pin JST-SM connector pair
 
-
+### Pictures with makerplane Display
 ![Alt PCB](https://github.com/valtsu23/Pictures/blob/main/DIY-Emu-Black-Dash/IMG_20240528_233423409.jpg)
 
 ![Alt Inside](https://github.com/valtsu23/Pictures/blob/main/DIY-Emu-Black-Dash/IMG_20240528_234437181.jpg)
@@ -106,3 +111,7 @@ Raspberry Pi 4 handles the communicatin with all the hardware via SPI and I2C. C
 ![Alt Case2](https://github.com/valtsu23/Pictures/blob/main/DIY-Emu-Black-Dash/IMG_20240528_234642311.jpg)
 
 ![Alt Case3](https://github.com/valtsu23/Pictures/blob/main/DIY-Emu-Black-Dash/IMG_20240528_234623667.jpg)
+
+### Here is a Hat PCB that is designed to work with any display. Functions are the same, but DS3231 RTC cannot be mounted on the pcb, but I added pins where it's possible to connect the RTC.
+![Alt Hat PCB](https://github.com/valtsu23/Pictures/blob/main/DIY-Emu-Black-Dash/IMG_20250207_003403716.jpg)
+![Alt Hat PCB](https://github.com/valtsu23/Pictures/blob/main/DIY-Emu-Black-Dash/IMG_20250207_003448921.jpg)
