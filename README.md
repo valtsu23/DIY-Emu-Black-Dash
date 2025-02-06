@@ -15,9 +15,6 @@ Biggest difference to previously mentioned is PCB. Now there isn't an additional
   - [Case and pcb files](https://drive.google.com/file/d/16hSwiSBqhmkN8jAcquyTdep4fbnegLqo/view?usp=sharing) (Used software: FreeCAD and Fusion 360)
   - [Pcb schematic in pdf](https://drive.google.com/file/d/1KawKwaSzzWXQF_xuIObFZ1UPyJIFHP33/view?usp=drive_link)
 
-### To do
-
-
 Raspberry Pi 5 version: https://github.com/valtsu23/DIY-Emu-Black-Dash-Rpi5
 
 ### Technical specs:
