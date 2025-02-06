@@ -16,7 +16,7 @@ Biggest difference to previously mentioned is PCB. Now there isn't an additional
   - [Pcb schematic in pdf](https://drive.google.com/file/d/1KawKwaSzzWXQF_xuIObFZ1UPyJIFHP33/view?usp=drive_link)
 
 ### To do
-  - Design a PCB what works like a Rpi Hat and works with any display
+
 
 Raspberry Pi 5 version: https://github.com/valtsu23/DIY-Emu-Black-Dash-Rpi5
 
@@ -85,10 +85,10 @@ Raspberry Pi 4 handles the communicatin with all the hardware via SPI and I2C. C
   - IC SOCKET 18-PINS (optional)
   - IC SOCKET 8-PINS 2pcs (optional)
   - FTR-F3AA005V
-#### From partco.fi, when using PCB designed for Makerplane display
+#### From partco.fi, when using a PCB designed for Makerplane display
   - 2x13 male pin header with long pins (20mm total length)
   - 2x13 female smd pin header
-#### From tme.eu, when using PCB on top of Raspberry Pi
+#### From tme.eu, when using a Hat PCB on top of Raspberry Pi
   - 2x20 female pin header with long pins SSQ-120-03-T-D
   - M2.5 screw spacer 16mm 222X16DREMEC 4pcs
   - M2.5x6 countersunk screw 4pcs
