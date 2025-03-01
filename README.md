@@ -9,6 +9,9 @@ Biggest difference to previously mentioned is PCB. Now there isn't an additional
 25.10.2024 released version 1.1
   - Cpu clock monitoring replaced with cpu load using Psutil ilbrary
 
+### To do
+- Make the code to support multiple screen sizes
+
 ### Additional data
   - [Video](https://youtu.be/x8BvJFvcHbc) 
   - [Raspberry Pi setup guide](https://drive.google.com/file/d/1KZesWHl7KMY-lIX4NdqELxCj08oUjc0y/view?usp=sharing)
@@ -26,6 +29,10 @@ Raspberry Pi 5 version: https://github.com/valtsu23/DIY-Emu-Black-Dash-Rpi5
 
 ### Hardware features
 Raspberry Pi 4 handles the communicatin with all the hardware via SPI and I2C. Can bus communication with MCP2515, ADC (MCP3002) reads light sensor values and Raspberry Pi adjusts screen brightness based on ambient light. DS3231 RTC to keep the clock in time. Neopixels for shiftlight. 12v to 5v DC-DC converter on board. Device needs switched 12V and continous 12v from battery to work correctly. Continous power is connected to a relay on PCB. Switched power wakes up the device and Raspberry pi starts booting and relay turns on. When Can Bus stream is lost Raspberry pi automatically starts shutdown process. After shutdown the relay turns off and cuts power from the device. The device doesn't consume any power after shutdown. Small button as a failsafe if Raspberry Pi crashes (pressing thins buttons turns relay off). 
+
+### Support for different screens
+Basically any hdmi screen can be used, but right now the code is designed to work only with 800x480 resolution. I have plans to make the code support more resolutions like 1080p and 720p. 
+I think touchscreen should work with most of the displays. Also the screen brightness control only works on Makerplane screen. 
 
 ### Software specs
 - Raspberry Pi OS Lite 64bit (Bookworm)
